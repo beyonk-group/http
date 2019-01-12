@@ -1,0 +1,36 @@
+{
+  "name": "@beyonk/sapper-httpclient",
+  "version": "0.0.0",
+  "description": "An isomorphic http client for Sapper",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "dependencies": {
+    "node-fetch": "^2.3.0",
+    "querystring": "^0.2.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/beyonk-adventures/sapper-httpclient.git"
+  },
+  "devDependencies": {
+    "code": "^5.2.4",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.2"
+  },
+  "scripts": {
+    "test": "mocha **/**.spec.js"
+  },
+  "keywords": [
+    "isomorphic",
+    "fetch",
+    "sapper",
+    "http-client",
+    "http",
+    "https",
+    "node-fetch"
+  ],
+  "author": "Antony Jones",
+  "license": "MIT"
+}
