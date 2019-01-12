@@ -1,6 +1,6 @@
 'use strict'
 
-const Api = require('lib')
+const Api = require('./lib/api')
 const pkg = require('./package.json')
 
 let config
