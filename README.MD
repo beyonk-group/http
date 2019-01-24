@@ -77,7 +77,8 @@ console.log(json)
 Catching errors:
 
 ```js
-import { NotFoundError } from '@beyonk/sapper-httpclient/errors'
+import { errors } from '@beyonk/sapper-httpclient'
+const { NotFoundError, ForbiddenError } = errors
 ```
 
 ## Running Tests

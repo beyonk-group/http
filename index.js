@@ -1,6 +1,7 @@
 'use strict'
 
 const { Api } = require('./lib/api')
+const errors = require('./lib/errors')
 const pkg = require('./package.json')
 
 let config
@@ -14,4 +15,4 @@ function create (provider) {
   return new Api(config, provider)
 }
 
-module.exports = { configure, create }
+module.exports = { configure, create, errors }
