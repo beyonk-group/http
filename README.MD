@@ -53,12 +53,12 @@ import { create } from '@beyonk/sapper-httpclient'
 
 // in a method (client-side)
 const api = create()
-const { json } = api.get('some/endpoint')
+const { json } = await api.get('some/endpoint')
 console.log(json)
 
 // in preload (isomorphic)
 const api = create(this.fetch)
-const { json } = api.get('some/endpoint')
+const { json } = await api.get('some/endpoint')
 console.log(json)
 ```
 
@@ -70,7 +70,7 @@ import { create } from '@beyonk/sapper-httpclient'
 
 // in preload (isomorphic)
 const api = create()
-const { json } = api.get('some/endpoint')
+const { json } = await api.get('some/endpoint')
 console.log(json)
 ```
 
