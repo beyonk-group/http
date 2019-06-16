@@ -56,9 +56,23 @@ const api = create()
 const { json } = await api.endpoint('some/endpoint').get()
 console.log(json)
 
-// in preload (isomorphic)
-const api = create(this.fetch)
-const { json } = await api.endpoint('some/endpoint').get()
+// in preload (Svelte v2) (isomorphic)
+const api = create()
+const { json } = await api
+  .transport(this.fetch) // Use sapper's built in "fetch" method
+  .endpoint('some/endpoint')
+  .get()
+console.log(json)
+
+
+// in preload (Svelte v3) (isomorphic)
+import { fetch } from '@sapper/app'
+
+const api = create()
+const { json } = await api
+  .transport(fetch) // Use sapper's built in "fetch" method
+  .endpoint('some/endpoint')
+  .get()
 console.log(json)
 ```
 
