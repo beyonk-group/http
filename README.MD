@@ -53,12 +53,12 @@ import { create } from '@beyonk/sapper-httpclient'
 
 // in a method (client-side)
 const api = create()
-const { json } = await api.get('some/endpoint')
+const { json } = await api.endpoint('some/endpoint').get()
 console.log(json)
 
 // in preload (isomorphic)
 const api = create(this.fetch)
-const { json } = await api.get('some/endpoint')
+const { json } = await api.endpoint('some/endpoint').get()
 console.log(json)
 ```
 
@@ -70,15 +70,49 @@ import { create } from '@beyonk/sapper-httpclient'
 
 // in preload (isomorphic)
 const api = create()
-const { json } = await api.get('some/endpoint')
+const { json } = await api.endpoint('some/endpoint').get()
 console.log(json)
+```
+
+Methods:
+
+```js
+const api = create()
+const client = api
+  .endpoint('some/endpoint')
+
+console.log(await client.get()) // Get endpoint
+console.log(await client.payload({ foo: 'bar' }).put()) // Put with body
+console.log(await client.payload({ foo: 'bar' }).post()) // Post with body
+console.log(await client.query({ foo: 'bar' }).get()) // Get with query
+console.log(await client.del()) // Delete
 ```
 
 Catching errors:
 
 ```js
-import { errors } from '@beyonk/sapper-httpclient'
-const { NotFoundError, ForbiddenError } = errors
+  await client
+    .endpoint('some/url')
+    .forbidden(e => {
+      console.error('Some error', e)
+    })
+    .notFound(e => {
+      console.error('Some error', e)
+    })
+    .accessDenied(e => {
+      console.error('Some error', e)
+    })
+    .conflict(e => {
+      console.error('Some error', e)
+    })
+    .preconditionFailed(e => {
+      console.error('Some error', e)
+    })
+    .default(e => {
+      // Any other error caught here
+      console.error('Some error', e)
+    })
+    .get()
 ```
 
 ## Running Tests
