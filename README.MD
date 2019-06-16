@@ -80,11 +80,14 @@ Use it on the server:
 
 ```js
 // src/routes/some-route.js
+import fetch from 'node-fetch' // or Sapper's built in fetch
 import { create } from '@beyonk/sapper-httpclient'
 
-// in preload (isomorphic)
 const api = create()
-const { json } = await api.endpoint('some/endpoint').get()
+const { json } = await api
+  .transport(fetch) // pass node fetch in here.
+  .endpoint('some/endpoint')
+  .get()
 console.log(json)
 ```
 
