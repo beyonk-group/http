@@ -122,19 +122,22 @@ console.log(profile)
   await client
     .endpoint('some/url')
     .forbidden(e => {
-      console.error('Some error', e)
+      console.error('Forbidden', e)
     })
     .notFound(e => {
-      console.error('Some error', e)
+      console.error('Not found', e)
     })
     .accessDenied(e => {
-      console.error('Some error', e)
+      console.error('Access denied', e)
     })
     .conflict(e => {
-      console.error('Some error', e)
+      console.error('Conflict', e)
     })
     .preconditionFailed(e => {
-      console.error('Some error', e)
+      console.error('Precondition failed', e)
+    })
+    .badData(e => {
+      console.error('Bad data', e)
     })
     .default(e => {
       // Any other error caught here
