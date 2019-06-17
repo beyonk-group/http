@@ -30,13 +30,13 @@ Generally this means that your usage is the same no matter where you call it, wi
 
 ### To use within a Sapper application:
 
-Install it
+### Install it
 
 ```bash
 npm i -D @beyonk/sapper-httpclient
 ```
 
-Configure it (both server-side and client-side as there are two bundles)
+### Configure it (both server-side and client-side as there are two bundles)
 
 ```js
 // src/client.js && src/server.js
@@ -45,7 +45,7 @@ import { configure } from '@beyonk/sapper-httpclient'
 configure({ baseUrl: 'https://example.com/your/api/base' })
 ```
 
-Use it on the client:
+### Use it on the client:
 
 ```js
 // src/routes/some-route.html
@@ -64,7 +64,6 @@ const { json } = await api
   .get()
 console.log(json)
 
-
 // in preload (Svelte v3) (isomorphic)
 import { fetch } from '@sapper/app'
 
@@ -76,7 +75,7 @@ const { json } = await api
 console.log(json)
 ```
 
-Use it on the server:
+### Use it on the server:
 
 ```js
 // src/routes/some-route.js
@@ -91,7 +90,7 @@ const { json } = await api
 console.log(json)
 ```
 
-Methods:
+## Methods
 
 ```js
 const api = create()
@@ -105,7 +104,19 @@ console.log(await client.query({ foo: 'bar' }).get()) // Get with query
 console.log(await client.del()) // Delete
 ```
 
-Catching errors:
+## Using built in response handling
+
+```js
+const api = create()
+const profile = await api
+  .endpoint('some/endpoint')
+  .get(json => {
+    return json.profile
+  })
+console.log(profile)
+```
+
+## Catching errors
 
 ```js
   await client
