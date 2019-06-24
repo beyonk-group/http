@@ -7,9 +7,7 @@
     "lib": "lib"
   },
   "dependencies": {
-    "just-compose": "^1.1.0",
-    "node-fetch": "^2.3.0",
-    "querystring": "^0.2.0"
+    "just-compose": "^1.1.0"
   },
   "repository": {
     "type": "git",
@@ -29,8 +27,7 @@
     "sapper",
     "http-client",
     "http",
-    "https",
-    "node-fetch"
+    "https"
   ],
   "author": "Antony Jones",
   "license": "MIT"

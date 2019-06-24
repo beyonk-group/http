@@ -22,7 +22,7 @@ The way it does this is by trying to use the first available fetch method, and f
 
 1. Any fetch library you pass to `create()` (for example, `preload`'s `this.fetch`)
 1. window.fetch if the library detects it is running clientside
-1. `node-fetch` if nothing else is available (pure server-side)
+1. `node-fetch`, or whatever you want to pass in, if nothing else is available (pure server-side)
 
 Generally this means that your usage is the same no matter where you call it, with one exception - using this library in the `preload` method requires you to pass in Sapper's special `this.fetch` method, as it is not available outside of the preload method. Examples of which are below.
 
