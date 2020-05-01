@@ -40,9 +40,9 @@ npm i -D @beyonk/sapper-httpclient
 
 ```js
 // src/client.js && src/server.js
-import { configure } from '@beyonk/sapper-httpclient'
+import Api from '@beyonk/sapper-httpclient'
 
-configure({ baseUrl: 'https://example.com/your/api/base' })
+Api.configure({ baseUrl: 'https://example.com/your/api/base' })
 ```
 
 ### Use it on the client:
