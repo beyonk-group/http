@@ -102,6 +102,7 @@ console.log(await client.payload({ foo: 'bar' }).put()) // Put with body
 console.log(await client.payload({ foo: 'bar' }).post()) // Post with body
 console.log(await client.query({ foo: 'bar' }).get()) // Get with query
 console.log(await client.del()) // Delete
+console.log(await client.headers({ foo: 'bar' }).put()) // Put with headers
 ```
 
 ## Using built in response handling
