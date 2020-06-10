@@ -147,9 +147,22 @@ console.log(profile)
     .get()
 ```
 
-## Running Tests
+## Enhanced Fetch
+
+As of v4.0.0, your underlying http client will be wrapped in [vercel/fetch](https://github.com/vercel/fetch) to work around [some issues](https://twitter.com/rauchg/status/1259890452813082624) in `fetch`
+
+To stop this behaviour, turn enhanced fetch off:
 
 ```js
+Api.configure({
+  ...,
+  enhancedFetch: false
+})
+```
+
+## Running Tests
+
+```sh
 npm test
 ```
 
