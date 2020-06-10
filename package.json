@@ -1,6 +1,6 @@
 {
   "name": "@beyonk/sapper-httpclient",
-  "version": "3.6.0",
+  "version": "4.0.0",
   "description": "An isomorphic http client for Sapper",
   "main": "index.js",
   "directories": {
