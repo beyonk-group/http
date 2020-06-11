@@ -7,21 +7,32 @@
     "lib": "lib"
   },
   "dependencies": {
-    "@zeit/fetch": "^6.0.0",
-    "just-compose": "^1.1.0",
-    "node-fetch": "^2.6.0"
+    "just-compose": "^1.1.0"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/beyonk-adventures/sapper-httpclient.git"
   },
   "devDependencies": {
+    "@beyonk/eslint-config": "^4.2.0",
     "@hapi/code": "^5.3.1",
-    "mocha": "^6.1.4",
-    "sinon": "^7.3.1"
+    "eslint": "^7.2.0",
+    "mocha": "^6.2.3",
+    "sinon": "^7.5.0"
+  },
+  "eslintConfig": {
+    "extends": "@beyonk",
+    "globals": {
+      "beforeEach": true,
+      "afterEach": true,
+      "describe": true,
+      "context": true,
+      "it": true
+    }
   },
   "scripts": {
-    "test": "mocha **/**.spec.js"
+    "test": "mocha **/**.spec.js",
+    "lint": "eslint lib --ext .js"
   },
   "keywords": [
     "isomorphic",

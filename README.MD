@@ -15,6 +15,7 @@ In sapper, there are three different ways of fetching data:
 * client
 * server
 * isomorphic (client + server)
+* retries (on various network errors)
 
 This library helps you abstract over where you are fetching data, meaning that your code maintains consistency without having to worry about where your data is being fetched.
 
@@ -147,36 +148,24 @@ console.log(profile)
     .get()
 ```
 
-## Enhanced Fetch
+## Retries
 
-As of v4.0.0, your underlying http client will be wrapped in [vercel/fetch](https://github.com/vercel/fetch) to work around [some issues](https://twitter.com/rauchg/status/1259890452813082624) in `fetch`
+As of v5.0.0, the http client can retry if a network error is encountered. The default is `retry: false`, and requests won't be retried.
 
-Note that enhanced fetch will check `process.browser` to determine if it is able to use `vercel/fetch` or not.
-
-To stop this behaviour, turn enhanced fetch off:
+Configure it as follows:
 
 ```js
+import Api from '@beyonk/sapper-httpclient'
+
 Api.configure({
-  ...,
-  enhancedFetch: false
+  retry: {
+    attempts: 3 // How many times to retry before giving up
+    errors: [ 'ECONNRESET' ] // A list of error codes
+  }
 })
 ```
 
-## Troubleshooting
-
-I'm seeing missing modules in my bundler logs
-
-```
-'url' is imported by ../sapper-httpclient/node_modules/@zeit/fetch-cached-dns/index.js, but could not be resolved – treating it as an external dependency
-'url' is imported by ../sapper-httpclient/node_modules/@zeit/fetch/index.js, but could not be resolved – treating it as an external dependency
-'net' is imported by ../sapper-httpclient/node_modules/@zeit/fetch-cached-dns/index.js, but could not be resolved – treating it as an external dependency
-'url' is imported by url?commonjs-external, but could not be resolved – treating it as an external dependency
-'net' is imported by net?commonjs-external, but could not be resolved – treating it as an external dependency
-'dns' is imported by ../sapper-httpclient/node_modules/@zeit/dns-cached-resolve/lib/dns-resolve.js, but could not be resolved – treating it as an external dependency
-'dns' is imported by dns?commonjs-external, but could not be resolved – treating it as an external dependency
-```
-
-The `@zeit/fetch` module requires the `net` and `url` packages from nodejs. These aren't available in a browser, so you should use `rollup-plugin-node-builtins` to stub them.
+errors is an array of any number of the [nodejs network error codes](https://nodejs.org/api/errors.html#errors_common_system_errors)
 
 ## Running Tests
 
