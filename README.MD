@@ -4,7 +4,7 @@
 
 ## Sapper HttpClient
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) [![CircleCI](https://circleci.com/gh/beyonk-adventures/sapper-httpclient.svg?style=shield)](https://circleci.com/gh/beyonk-adventures/sapper-httpclient)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) ![publish](https://github.com/beyonk-adventures/sapper-httpclient/workflows/publish/badge.svg?branch=master)
 
 Sapper isomorphic fetch library
 
