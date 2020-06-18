@@ -106,6 +106,23 @@ console.log(await client.del()) // Delete
 console.log(await client.headers({ foo: 'bar' }).put()) // Put with headers
 ```
 
+#### client.query
+
+The `query` method accepts an object of params as either a String or Array of Strings.
+If any property passed into the query is `undefined` it will be ignored. 
+
+```js
+const api = create()
+const client = api
+  .endpoint('some/endpoint')
+
+console.log(await client.query({ foo: 'bar' }).get()) // will make a GET request to 'some/endpoint?foo=bar'
+console.log(await client.query({ foo: 'bar', baz: 'qux' }).get()) // will make a GET request to 'some/endpoint?foo=bar&baz=qux
+console.log(await client.query({ foo: ['bar', 'qux' ] }).get()) // will make a GET request to 'some/endpoint?foo=bar&foo=qux
+console.log(await client.query({ foo: undefined, baz: 'qux' }).get()) // will make a GET request to 'some/endpoint?baz=qux
+
+```
+
 ## Using built in response handling
 
 ```js
