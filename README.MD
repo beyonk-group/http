@@ -184,6 +184,35 @@ Api.configure({
 
 errors is an array of any number of the [nodejs network error codes](https://nodejs.org/api/errors.html#errors_common_system_errors)
 
+
+## Parsing error payloads
+
+As of v7.0.0 the library defaults to parsing error payloads as JSON. This means you can use the data returned in your response.
+
+```js
+  /** endpoint returns 401 with:
+    {
+      username: 'Naughty User'
+    }
+  **/
+
+  await client
+    .endpoint('some/url')
+    .accessDenied(e => {
+      console.error('You are not allowed', e.body.username)
+    })
+```
+
+To turn this behaviour off, pass the option `parseErrors` with value false:
+
+```js
+import Api from '@beyonk/sapper-httpclient'
+
+Api.configure({
+  parseErrors: false
+})
+```
+
 ## Running Tests
 
 ```sh
