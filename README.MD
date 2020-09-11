@@ -54,23 +54,14 @@ import { create } from '@beyonk/sapper-httpclient'
 
 // in a method (client-side)
 const api = create()
-const { json } = await api.endpoint('some/endpoint').get()
-console.log(json)
-
-// in preload (Svelte v2) (isomorphic)
-const api = create()
-const { json } = await api
-  .transport(this.fetch) // Use sapper's built in "fetch" method
-  .endpoint('some/endpoint')
-  .get()
+const json = await api.endpoint('some/endpoint').get()
 console.log(json)
 
 // in preload (Svelte v3) (isomorphic)
-import { fetch } from '@sapper/app'
 
 const api = create()
-const { json } = await api
-  .transport(fetch) // Use sapper's built in "fetch" method
+const json = await api
+  .transport(this.fetch) // Use sapper's built in "fetch" method
   .endpoint('some/endpoint')
   .get()
 console.log(json)
@@ -84,11 +75,25 @@ import fetch from 'node-fetch' // or Sapper's built in fetch
 import { create } from '@beyonk/sapper-httpclient'
 
 const api = create()
-const { json } = await api
+const json = await api
   .transport(fetch) // pass node fetch in here.
   .endpoint('some/endpoint')
   .get()
 console.log(json)
+```
+
+### Handling the response
+
+```js
+import { create } from '@beyonk/sapper-httpclient'
+
+const api = create()
+const json = await api
+  .endpoint('some/endpoint')
+  .get((json, httpStatus) => {
+    console.log('json response is', json)
+    console.log('http status code is', httpStatus)
+  })
 ```
 
 ## Methods
