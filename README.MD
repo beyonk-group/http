@@ -58,11 +58,10 @@ const json = await api.endpoint('some/endpoint').get()
 console.log(json)
 
 // in preload (Svelte v3) (isomorphic)
-import { fetch } from '@sapper/app'
 
 const api = create()
 const json = await api
-  .transport(fetch) // Use sapper's built in "fetch" method
+  .transport(this.fetch) // Use sapper's built in "fetch" method
   .endpoint('some/endpoint')
   .get()
 console.log(json)
