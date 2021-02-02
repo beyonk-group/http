@@ -148,6 +148,9 @@ console.log(profile)
     .forbidden(e => {
       console.error('Forbidden', e)
     })
+    .gone(e => {
+      console.error('Gone', e)
+    })
     .notFound(e => {
       console.error('Not found', e)
     })
@@ -156,6 +159,9 @@ console.log(profile)
     })
     .conflict(e => {
       console.error('Conflict', e)
+    })
+    .paymentRequired(e => {
+      console.error('Payment Required', e)
     })
     .preconditionFailed(e => {
       console.error('Precondition failed', e)
