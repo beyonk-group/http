@@ -142,6 +142,10 @@ console.log(profile)
 
 ## Catching errors
 
+### Per request
+
+If no local error handler is specified, the fallback handler `default` is called. If this isn't specified, the error is logged to the console.
+
 ```js
   await client
     .endpoint('some/url')
@@ -176,9 +180,33 @@ console.log(profile)
     .get()
 ```
 
+### At a global level
+
+Request local error handlers override global error handlers, but if a local error handler are not specified, these will be called instead, if it exists.
+
+Names are the same as the local handlers:
+
+```js
+  import Api from '@beyonk/sapper-httpclient'
+  import { goto } from '@sapper/app'
+
+  Api.configure({
+    baseUrl: 'https://example.com/your/api/base',
+    handlers: {
+      paymentRequired(e => {
+        goto('/checkout')
+      })
+    }
+  })
+
+  await client
+    .endpoint('some/url')
+    .get()
+```
+
 ## Retries
 
-As of v5.0.0, the http client can retry if a network error is encountered. The default is `retry: false`, and requests won't be retried.
+The http client can retry if a network error is encountered. The default is `retry: false`, and requests won't be retried.
 
 Configure it as follows:
 
