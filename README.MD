@@ -57,11 +57,10 @@ const api = create()
 const json = await api.endpoint('some/endpoint').get()
 console.log(json)
 
-// in preload (Svelte v3) (isomorphic)
-
+// in preload (isomorphic)
 const api = create()
 const json = await api
-  .transport(this.fetch) // Use sapper's built in "fetch" method
+  .context(this) // Pass in "this" from preload, to sapper's built in "fetch" method, as well as providing this.redirect to handlers
   .endpoint('some/endpoint')
   .get()
 console.log(json)
@@ -76,7 +75,7 @@ import { create } from '@beyonk/sapper-httpclient'
 
 const api = create()
 const json = await api
-  .transport(fetch) // pass node fetch in here.
+  .context({ fetch }) // pass node fetch in here.
   .endpoint('some/endpoint')
   .get()
 console.log(json)
@@ -178,6 +177,43 @@ If no local error handler is specified, the fallback handler `default` is called
       console.error('Some error', e)
     })
     .get()
+```
+
+#### Handler signature
+
+Handlers have a signature with two items:
+
+```js
+.badData((e, ctx) => {
+  console.error('Bad data', e)
+  ctx.redirect('/foo/bar')
+  // or
+  ctx.error('/foo/bar')
+})
+```
+
+ctx can be whatever you want really - it is whatever you pass in as `context(...)`.
+
+However, if the `context` object you pass in has a `fetch` function, this is used as the `fetch` for XHR requests, so that in sapper you can just pass the entire `this` object in `preload`:
+
+```js
+export async function preload () {
+  await Api
+    .context(this) // fetch, redirect, error.
+    .endpoint('foo/bar')
+    ...
+}
+```
+
+you can also pass in other things to the context:
+
+```js
+export async function preload () {
+  await Api
+    .context({ ...this, baz: 'qux' })
+    .endpoint('foo/bar')
+    ...
+}
 ```
 
 ### At a global level
