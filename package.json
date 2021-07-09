@@ -1,6 +1,6 @@
 {
   "name": "@beyonk/sapper-httpclient",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "description": "An isomorphic http client for Sapper",
   "main": "lib/entrypoint.js",
   "module": "lib/entrypoint.js",
