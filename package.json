@@ -2,12 +2,11 @@
   "name": "@beyonk/sapper-httpclient",
   "version": "9.0.0",
   "description": "An isomorphic http client for Sapper",
-  "main": "index.js",
+  "main": "lib/entrypoint.js",
+  "module": "lib/entrypoint.js",
+  "type": "module",
   "directories": {
     "lib": "lib"
-  },
-  "dependencies": {
-    "just-compose": "^1.1.0"
   },
   "repository": {
     "type": "git",
@@ -15,9 +14,10 @@
   },
   "devDependencies": {
     "@beyonk/eslint-config": "^4.2.0",
+    "@beyonk/esm": "^4.0.1",
     "@hapi/code": "^5.3.1",
     "eslint": "^7.2.0",
-    "mocha": "^6.2.3",
+    "mocha": "^9.0.2",
     "sinon": "^7.5.0"
   },
   "eslintConfig": {
@@ -31,7 +31,7 @@
     }
   },
   "scripts": {
-    "test": "mocha './!(node_modules)/**/**.+(spec).js'",
+    "test": "mocha -r @beyonk/esm './!(node_modules)/**/**.+(spec).[m|c]js'",
     "lint": "eslint lib --ext .js"
   },
   "keywords": [
@@ -43,5 +43,8 @@
     "https"
   ],
   "author": "Antony Jones",
-  "license": "MIT"
+  "license": "MIT",
+  "volta": {
+    "node": "16.4.2"
+  }
 }
