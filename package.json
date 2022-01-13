@@ -4,6 +4,7 @@
   "description": "An isomorphic http client for Sapper",
   "main": "lib/entrypoint.js",
   "module": "lib/entrypoint.js",
+  "type": "module",
   "directories": {
     "lib": "lib"
   },
