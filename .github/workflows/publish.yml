@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: master
       - uses: volta-cli/action@v1
       - name: Cache pnpm modules
         uses: actions/cache@v2
@@ -32,6 +34,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          ref: master
       - uses: volta-cli/action@v1
       - name: Cache pnpm modules
         uses: actions/cache@v2
@@ -44,6 +48,5 @@ jobs:
         with:
           version: latest
           run_install: true
+      - run: npm config set //registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN }}
       - run: pnpm publish
-        env:
-          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
