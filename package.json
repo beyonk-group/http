@@ -45,6 +45,7 @@
   "author": "Antony Jones",
   "license": "MIT",
   "volta": {
-    "node": "16.4.2"
-  }
+    "node": "18.15.0"
+  },
+  "packageManager": "pnpm@8.0.0"
 }
