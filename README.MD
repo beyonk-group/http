@@ -2,15 +2,17 @@
   <img src="https://user-images.githubusercontent.com/218949/144224348-1b3a20d5-d68e-4a7a-b6ac-6946f19f4a86.png" width="198" />
 </a>
 
-## Sapper HttpClient
+## Http
 
-[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) ![publish](https://github.com/beyonk-adventures/sapper-httpclient/workflows/publish/badge.svg?branch=master)
+[![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com) ![publish](https://github.com/beyonk-adventures/http/workflows/publish/badge.svg?branch=master)
 
-Sapper isomorphic fetch library
+Isomorphic fetch library.
+<br />
+Formerly known as `@beyonk/sapper-httpclient`
 
 ## Why
 
-In sapper, there are three different ways of fetching data:
+In hybrid applications, there are three different ways of fetching data:
 
 * client
 * server
@@ -21,27 +23,27 @@ This library helps you abstract over where you are fetching data, meaning that y
 
 The way it does this is by trying to use the first available fetch method, and failing over to alternatives if a  method is not available. The methods it tries are, in the following order:
 
-1. Any fetch library you pass to `create()` (for example, `preload`'s `this.fetch`)
+1. Any fetch library you pass to `create()` (for example, `load`'s `fetch`)
 1. window.fetch if the library detects it is running clientside
 1. `node-fetch`, or whatever you want to pass in, if nothing else is available (pure server-side)
 
-Generally this means that your usage is the same no matter where you call it, with one exception - using this library in the `preload` method requires you to pass in Sapper's special `this.fetch` method, as it is not available outside of the preload method. Examples of which are below.
+Generally this means that your usage is the same no matter where you call it, with one exception - using this library in the `load` method requires you to pass in SvelteKit's special `fetch` method, as it is not available outside of the load method. Examples of which are below.
 
 ## Usage
 
-### To use within a Sapper application:
+### To use within an application:
 
 ### Install it
 
 ```bash
-npm i -D @beyonk/sapper-httpclient
+npm i -D @beyonk/http
 ```
 
 ### Configure it (both server-side and client-side as there are two bundles)
 
 ```js
 // src/client.js && src/server.js
-import Api from '@beyonk/sapper-httpclient'
+import Api from '@beyonk/http'
 
 Api.configure({ baseUrl: 'https://example.com/your/api/base' })
 ```
@@ -50,17 +52,17 @@ Api.configure({ baseUrl: 'https://example.com/your/api/base' })
 
 ```js
 // src/routes/some-route.html
-import { create } from '@beyonk/sapper-httpclient'
+import { create } from '@beyonk/http'
 
 // in a method (client-side)
 const api = create()
 const json = await api.endpoint('some/endpoint').get()
 console.log(json)
 
-// in preload (isomorphic)
+// in load (isomorphic)
 const api = create()
 const json = await api
-  .context(this) // Pass in "this" from preload, to sapper's built in "fetch" method, as well as providing this.redirect to handlers
+  .context({ fetch }) // Pass in the "fetch" parameter from load
   .endpoint('some/endpoint')
   .get()
 console.log(json)
@@ -69,9 +71,9 @@ console.log(json)
 ### Use it on the server:
 
 ```js
-// src/routes/some-route.js
-import fetch from 'node-fetch' // or Sapper's built in fetch
-import { create } from '@beyonk/sapper-httpclient'
+// src/routes/+page.server.js
+import fetch from 'node-fetch' // or SvelteKit's built in fetch
+import { create } from '@beyonk/http'
 
 const api = create()
 const json = await api
@@ -84,7 +86,7 @@ console.log(json)
 ### Handling the response
 
 ```js
-import { create } from '@beyonk/sapper-httpclient'
+import { create } from '@beyonk/http'
 
 const api = create()
 const json = await api
@@ -194,7 +196,7 @@ Handlers have a signature with two items:
 
 ctx can be whatever you want really - it is whatever you pass in as `context(...)`.
 
-However, if the `context` object you pass in has a `fetch` function, this is used as the `fetch` for XHR requests, so that in sapper you can just pass the entire `this` object in `preload`:
+However, if the `context` object you pass in has a `fetch` function, this is used as the `fetch` for XHR requests.
 
 ```js
 export async function preload () {
@@ -223,14 +225,14 @@ Request local error handlers override global error handlers, but if a local erro
 Names are the same as the local handlers:
 
 ```js
-  import Api from '@beyonk/sapper-httpclient'
-  import { goto } from '@sapper/app'
+  import Api from '@beyonk/http'
+  import { redirect } from '@sveltejs/kit'
 
   Api.configure({
     baseUrl: 'https://example.com/your/api/base',
     handlers: {
       paymentRequired(e => {
-        goto('/checkout')
+        redirect(307, '/checkout')
       })
     }
   })
@@ -247,7 +249,7 @@ The http client can retry if a network error is encountered. The default is `ret
 Configure it as follows:
 
 ```js
-import Api from '@beyonk/sapper-httpclient'
+import Api from '@beyonk/http'
 
 Api.configure({
   retry: {
@@ -281,7 +283,7 @@ As of v7.0.0 the library defaults to parsing error payloads as JSON. This means 
 To turn this behaviour off, pass the option `parseErrors` with value false:
 
 ```js
-import Api from '@beyonk/sapper-httpclient'
+import Api from '@beyonk/http'
 
 Api.configure({
   parseErrors: false
