@@ -188,9 +188,7 @@ Handlers have a signature with two items:
 ```js
 .badData((e, ctx) => {
   console.error('Bad data', e)
-  ctx.redirect('/foo/bar')
-  // or
-  ctx.error('/foo/bar')
+  throw redirect('/foo/bar')
 })
 ```
 
@@ -201,7 +199,7 @@ However, if the `context` object you pass in has a `fetch` function, this is use
 ```js
 export async function preload () {
   await Api
-    .context(this) // fetch, redirect, error.
+    .context({ fetch })
     .endpoint('foo/bar')
     ...
 }
@@ -232,7 +230,7 @@ Names are the same as the local handlers:
     baseUrl: 'https://example.com/your/api/base',
     handlers: {
       paymentRequired(e => {
-        redirect(307, '/checkout')
+        throw redirect(307, '/checkout')
       })
     }
   })
