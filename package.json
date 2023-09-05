@@ -1,6 +1,6 @@
 {
   "name": "@beyonk/http",
-  "version": "12.0.0",
+  "version": "12.0.1",
   "description": "An isomorphic http client for Svelte apps",
   "main": "lib/entrypoint.js",
   "module": "lib/entrypoint.js",
