@@ -1,7 +1,9 @@
-import recommended from '@beyonk/eslint-config/recommended'
 import mocha from '@beyonk/eslint-config/mocha'
+import recommended from '@beyonk/eslint-config/recommended'
+import { defineConfig, globalIgnores } from 'eslint/config'
 
-export default [
+export default defineConfig([
+  ...globalIgnores('dist'),
   ...recommended,
   ...mocha,
   {
@@ -10,4 +12,4 @@ export default [
       sourceType: 'module'
     }
   }
-]
+])
