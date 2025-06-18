@@ -12,9 +12,17 @@
   ],
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs"
+      "types": "./lib/index.js",
+      "import": "./lib/index.js"
+    }
+  },
+  "publishConfig": {
+    "exports": {
+      ".": {
+        "types": "./dist/index.d.ts",
+        "import": "./dist/index.js",
+        "require": "./dist/index.cjs"
+      }
     }
   },
   "devDependencies": {
@@ -40,7 +48,7 @@
   "scripts": {
     "test": "mocha './!(node_modules)/**/**.+(spec).js'",
     "lint": "eslint lib --ext .js",
-    "compile": "tsup"
+    "build": "tsup"
   },
   "keywords": [
     "isomorphic",
