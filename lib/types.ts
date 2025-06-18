@@ -33,7 +33,7 @@ export type RequestConfig = {
   /** API endpoint */
   endpoint: string | null;
   /** HTTP method */
-  method: 'get' | 'GET' | 'post' | 'POST' | 'put' | 'PUT' | 'patch' | 'PATCH' | 'delete' | 'DELETE';
+  method:  'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   /** Request payload */
   payload: any | null;
   /** Query parameters */
