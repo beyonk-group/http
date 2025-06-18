@@ -10,19 +10,11 @@
   "files": [
     "dist/*"
   ],
-  "exports": {
+ "exports": {
     ".": {
-      "types": "./lib/index.js",
-      "import": "./lib/index.js"
-    }
-  },
-  "publishConfig": {
-    "exports": {
-      ".": {
-        "types": "./dist/index.d.ts",
-        "import": "./dist/index.js",
-        "require": "./dist/index.cjs"
-      }
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
     }
   },
   "devDependencies": {
