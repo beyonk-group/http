@@ -7,7 +7,7 @@ on:
       - reopened
       - synchronize
     paths:
-      - libs/**
+      - lib
 
 jobs:
   canary-libs:
