@@ -1,23 +1,17 @@
-name: Continuous Releases
+name: PR / Canary Libs
 
-on: [push, pull_request]
+on:
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+    paths:
+      - libs/**
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-
-      - uses: pnpm/action-setup@v4
-        with:
-          run_install: true
-
-      - name: Compile
-        run: pnpm build
-
-      - name: Release
-        run: pnpm dlx pkg-pr-new publish
+  canary-libs:
+    uses: beyonk-group/workflows/.github/workflows/canary-libs.yml@main
+    secrets: inherit
+    with:
+      use_playwright: true
