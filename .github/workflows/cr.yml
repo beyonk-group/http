@@ -6,8 +6,6 @@ on:
       - opened
       - reopened
       - synchronize
-    paths:
-      - lib
 
 jobs:
   canary-libs:
