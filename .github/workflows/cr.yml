@@ -3,7 +3,7 @@ name: Continuous Releases
 on: [push, pull_request]
 
 jobs:
-  test:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
