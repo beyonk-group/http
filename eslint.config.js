@@ -3,7 +3,7 @@ import recommended from '@beyonk/eslint-config/recommended'
 import { defineConfig, globalIgnores } from 'eslint/config'
 
 export default defineConfig([
-  ...globalIgnores('dist'),
+  globalIgnores([ 'dist' ]),
   ...recommended,
   ...mocha,
   {
