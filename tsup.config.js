@@ -1,12 +1,20 @@
 import { defineConfig } from 'tsup'
 
-export default defineConfig(
+export default defineConfig([
   {
     entry: [ 'lib/index.js' ],
-    format: [ 'esm', 'cjs' ],
+    format: [ 'esm' ],
+    target: 'es2023',
+    dts: true,
+    sourcemap: false,
+    clean: true
+  },
+  {
+    entry: [ 'lib/index.cjs' ],
+    format: [ 'cjs' ],
     target: 'es2023',
     dts: true,
     sourcemap: false,
     clean: true
   }
-)
+])
