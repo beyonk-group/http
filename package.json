@@ -3,6 +3,7 @@
   "version": "12.1.2",
   "description": "An isomorphic http client for Svelte apps",
   "type": "module",
+  "main": "./dist/index.cjs",
   "repository": {
     "type": "git",
     "url": "https://github.com/beyonk-adventures/http.git"
