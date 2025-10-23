@@ -8,8 +8,8 @@ export type ApiOptions = {
   baseUrl?: string;
   /** Mock client for testing */
   mock?: FetchClient;
-  /** Fetch client for HTTP requests */
-  fetch?: FetchClient;
+  /** Function that returns a fetch client */
+  fetch?: () => FetchClient | Promise<FetchClient>;
   /** Whether to retry failed requests */
   retry?: RetryOptions | false;
   /** Whether to parse error responses as JSON */
