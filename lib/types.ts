@@ -82,7 +82,7 @@ export type ErrorHandlers = {
 /**
  * Function to transform API response
  */
-export type ResponseTransformer<T = any> = (json: any, httpStatus: number, response: HttpResponse) => T;
+export type ResponseTransformer<T = any> = (json: any, httpStatus: number, response: Response) => T;
 
 /**
  * Fetch client interface
@@ -110,5 +110,5 @@ export type Response = {
 export type QueryResult = {
   httpStatus: number;
   json?: any;
-  response: HttpResponse;
+  response: Response;
 };
